@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator2.EngineeringPage"
+             Title="Инженерный"
+             Shell.NavBarIsVisible="False">
+            
+
+    <!-- Используем те же пропорции, что и в обычном -->
+    <Grid RowDefinitions=".15*, .80*" Padding="10" RowSpacing="10">
+        
+        <Button Text="☰" 
+        Grid.Row="0" Grid.Column="0" 
+        HorizontalOptions="Start" VerticalOptions="Start"
+        BackgroundColor="DarkGray" TextColor="White"
+        CornerRadius="50"
+        FontSize="20" Margin="5,15,0,0" ZIndex="1"
+        Clicked="OnMenuClicked"/> 
+        
+        <!-- ЭКРАН (Скопировано стиль в стиль из вашего MainPage) -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="Grey" 
+               CornerRadius="15" 
+               Padding="20"
+               HasShadow="True"
+               BorderColor="Transparent">
+
+            
+            <Label x:Name="ResultLabel"
+                   TranslationX="15" TranslationY="5" 
+                   Text="0"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   FontSize="40"
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="End" />
+        </Frame>
+
+        <!-- СЕТКА КНОПОК -->
+        <!-- Убрали кнопку "Вернуться", теперь тут только калькулятор -->
+        <Grid Grid.Row="1" ColumnSpacing="5" RowSpacing="5">
+
+            <!-- 5 Колонок (чтобы влезли sin, cos и т.д.) -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 6 Строк -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- РЯД 0: Тригонометрия + Очистка -->
+            <!-- Для инженерных кнопок используем цвет чуть темнее (#505050), чтобы отличались -->
+            <Button Text="sin" Grid.Row="0" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="28" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="cos" Grid.Row="0" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="28" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="tan" Grid.Row="0" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="28" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="C"   Grid.Row="0" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="LightGray" TextColor="Black" Clicked="OnClearClicked"/>
+            <Button Text="+/-" Grid.Row="0" Grid.Column="4" CornerRadius="35" FontAttributes="Bold" FontSize="28" BackgroundColor="LightGray" TextColor="Black" Clicked="OnNegativeClicked"/>
+
+            <!-- РЯД 1: Логарифмы и корни -->
+            <Button Text="ln"  Grid.Row="1" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="log" Grid.Row="1" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="28" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="x²"  Grid.Row="1" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="√"   Grid.Row="1" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="/"   Grid.Row="1" Grid.Column="4" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
+
+            <!-- РЯД 2: Числа 7-8-9 -->
+            <Button Text="π"   Grid.Row="2" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="#505050" Clicked="OnPiClicked"/>
+            <Button Text="7"   Grid.Row="2" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="8"   Grid.Row="2" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="9"   Grid.Row="2" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="X"   Grid.Row="2" Grid.Column="4" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
+
+            <!-- РЯД 3: Числа 4-5-6 -->
+            <Button Text="e"   Grid.Row="3" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="#505050" Clicked="OnPiClicked"/>
+            <Button Text="4"   Grid.Row="3" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="5"   Grid.Row="3" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="6"   Grid.Row="3" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="-"   Grid.Row="3" Grid.Column="4" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
+
+            <!-- РЯД 4: Числа 1-2-3 -->
+            <Button Text="%"   Grid.Row="4" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="#505050" Clicked="OnScientificClicked"/>
+            <Button Text="1"   Grid.Row="4" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="2"   Grid.Row="4" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="3"   Grid.Row="4" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="+"   Grid.Row="4" Grid.Column="4" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
+
+            <!-- РЯД 5: Ноль и Равно -->
+            <!-- Здесь 0 занимает две клетки, как в обычном, но с учетом 5 колонок -->
+            <Button Text="0" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <Button Text="." Grid.Row="5" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
+            <!-- Равно теперь занимает две клетки справа, чтобы по нему было проще попасть -->
+            <Button Text="=" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" CornerRadius="35" FontAttributes="Bold" FontSize="30" BackgroundColor="Orange" TextColor="White" Clicked="OnCalculateClicked"/>
+
+        </Grid>
+    </Grid>
+</ContentPage>
