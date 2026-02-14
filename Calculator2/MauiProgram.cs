@@ -1,4 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+
+#if WINDOWS
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+using WinRT.Interop;
+#endif
 
 namespace Calculator2
 {
@@ -13,11 +20,40 @@ namespace Calculator2
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("Digital.ttf", "Digital");
+                })
+                .ConfigureLifecycleEvents(events =>
+                {
+#if WINDOWS
+                    events.AddWindows(w =>
+                    {
+                        w.OnWindowCreated(window =>
+                        {
+                            var hwnd = WindowNative.GetWindowHandle(window);
+                            var windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+                            var appWindow = AppWindow.GetFromWindowId(windowId);
+
+                            // Отключение кнопки "развернуть" и ресайза
+                            if (appWindow.Presenter is OverlappedPresenter presenter)
+                            {
+                                presenter.IsMaximizable = false;
+                                presenter.IsResizable = false;
+                            }
+
+                            // Центрирование окна
+                            var display = DisplayArea.Primary;
+                            int width = 450;
+                            int height = 600;
+                            int x = (display.WorkArea.Width - width) / 2;
+                            int y = (display.WorkArea.Height - height) / 2;
+
+                            appWindow.MoveAndResize(new Windows.Graphics.RectInt32(x, y, width, height));
+                        });
+                    });
+#endif
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

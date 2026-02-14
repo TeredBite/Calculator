@@ -9,9 +9,9 @@
         <Button Text="☰" 
         Grid.Row="0" Grid.Column="0" 
         HorizontalOptions="Start" VerticalOptions="Start"
-        BackgroundColor="DarkGray" TextColor="White"
+        BackgroundColor="Transparent" TextColor="White"
         CornerRadius="50"
-        FontSize="20" Margin="5,15,0,0" ZIndex="1"
+        FontSize="35" Margin="-10,6,0,0" ZIndex="1"
         Clicked="OnMenuClicked"/>
         
         <Frame Grid.Row="0" 
@@ -21,10 +21,10 @@
        HasShadow="True"
        BorderColor="Transparent">
 
-            <!-- Сам текст теперь внутри рамки -->
+            
             <Label x:Name="ResultLabel"
            TranslationX="15" TranslationY="5" 
-           Text="12345678901211"
+           Text="12345678901211.E"
            FontAttributes="Bold"
            TextColor="White"
            FontSize="40"
@@ -32,10 +32,10 @@
            VerticalTextAlignment="End" />
         </Frame>
 
-        <!-- Сетка для кнопок -->
+        
         <Grid Grid.Row="1" ColumnSpacing="5" RowSpacing="5">
             
-            <!-- Определение колонок (4 штуки) -->
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -43,7 +43,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
-            <!-- Определение строк (5 штук) -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -52,32 +51,26 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- РЯД 0 -->
             <Button Text="C" Grid.Row="0" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="LightGray" TextColor="Black" Clicked="OnClearClicked"/>
             <Button Text="+/-" Grid.Row="0" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="LightGray" TextColor="Black" Clicked="OnNegativeClicked"/>
             <Button Text="%" Grid.Row="0" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="LightGray" TextColor="Black" Clicked="OnPercentClicked"/>
             <Button Text="/" Grid.Row="0" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
 
-            <!-- РЯД 1 -->
             <Button Text="7" Grid.Row="1" Grid.Column="0" CornerRadius="35" FontAttributes= "Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="8" Grid.Row="1" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="9" Grid.Row="1" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="X" Grid.Row="1" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
 
-            <!-- РЯД 2 -->
             <Button Text="4" Grid.Row="2" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="5" Grid.Row="2" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="6" Grid.Row="2" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="-" Grid.Row="2" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
 
-            <!-- РЯД 3 -->
             <Button Text="1" Grid.Row="3" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="2" Grid.Row="3" Grid.Column="1" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="3" Grid.Row="3" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="+" Grid.Row="3" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="Orange" TextColor="White" Clicked="OnOperatorClicked"/>
 
-            <!-- РЯД 4 -->
-            <!-- Кнопка 0 растянута на 2 колонки с помощью Grid.ColumnSpan -->
             <Button Text="0" Grid.Row="4" Grid.Column="0" CornerRadius="35" FontAttributes="Bold" FontSize="40" Grid.ColumnSpan="2" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="." Grid.Row="4" Grid.Column="2" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="DarkGray" Clicked="OnNumberClicked"/>
             <Button Text="=" Grid.Row="4" Grid.Column="3" CornerRadius="35" FontAttributes="Bold" FontSize="40" BackgroundColor="Orange" TextColor="White" Clicked="OnCalculateClicked"/>
@@ -90,15 +83,12 @@
           IsVisible="False"
           ZIndex="99">
 
-            <!-- Жест нажатия, чтобы закрыть гифку -->
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnSecretCloseClicked"/>
             </Grid.GestureRecognizers>
 
             <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
 
-                <!-- Ваша Гифка -->
-                <!-- IsAnimationPlaying="True" обязательно для гифок -->
                 <Image Source="six.gif" 
                    WidthRequest="450" 
                    HeightRequest="600"

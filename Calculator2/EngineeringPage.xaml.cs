@@ -7,7 +7,6 @@ public partial class EngineeringPage : ContentPage
 
     private void OnMenuClicked(object sender, EventArgs e)
     {
-        // Эта команда открывает боковое меню программно
         Shell.Current.FlyoutIsPresented = true;
     }
 
@@ -20,13 +19,11 @@ public partial class EngineeringPage : ContentPage
         InitializeComponent();
     }
 
-    // --- НАВИГАЦИЯ НАЗАД ---
     private async void OnBackClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync(); // Возврат на главную
+        await Navigation.PopAsync();
     }
 
-    // --- ПОМОЩНИКИ ---
     private async Task AnimateButton(Button button)
     {
         await button.FadeTo(0.5, 100);
@@ -42,12 +39,10 @@ public partial class EngineeringPage : ContentPage
 
     private void SetNumberToScreen(double number)
     {
-        // Округляем до 8 знаков, чтобы sin(pi) не давал 0.0000000000123
         double rounded = Math.Round(number, 8);
         ResultLabel.Text = rounded.ToString(CultureInfo.InvariantCulture);
     }
 
-    // --- БАЗОВАЯ ЛОГИКА (Копия MainPage) ---
     private async void OnNumberClicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
@@ -116,7 +111,6 @@ public partial class EngineeringPage : ContentPage
         SetNumberToScreen(val * -1);
     }
 
-    // --- НОВАЯ ИНЖЕНЕРНАЯ ЛОГИКА ---
 
     private async void OnScientificClicked(object sender, EventArgs e)
     {
@@ -130,7 +124,6 @@ public partial class EngineeringPage : ContentPage
         switch (func)
         {
             case "sin":
-                // Считаем в градусах (умножаем на PI/180)
                 result = Math.Sin(currentVal * Math.PI / 180);
                 break;
             case "cos":
@@ -140,17 +133,17 @@ public partial class EngineeringPage : ContentPage
                 result = Math.Tan(currentVal * Math.PI / 180);
                 break;
             case "log":
-                result = Math.Log10(currentVal); // Десятичный логарифм
+                result = Math.Log10(currentVal); 
                 break;
             case "ln":
-                result = Math.Log(currentVal); // Натуральный логарифм
+                result = Math.Log(currentVal); 
                 break;
             case "√":
                 if (currentVal >= 0)
                     result = Math.Sqrt(currentVal);
                 else
                 {
-                    ResultLabel.Text = "Error"; // Корень из отрицательного нельзя
+                    ResultLabel.Text = "Error"; 
                     return;
                 }
                 break;
@@ -163,12 +156,11 @@ public partial class EngineeringPage : ContentPage
         }
 
         SetNumberToScreen(result);
-        // Сразу сохраняем результат как начало следующего действия
+   
         firstNumber = result;
-        isOperatorClicked = true; // Чтобы следующая цифра начала новый ввод
+        isOperatorClicked = true; 
     }
 
-    // Кнопки ПИ и E
     private async void OnPiClicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
@@ -179,6 +171,6 @@ public partial class EngineeringPage : ContentPage
         else // e
             SetNumberToScreen(Math.E);
 
-        isOperatorClicked = false; // Это как ввод цифры
+        isOperatorClicked = false; 
     }
 }

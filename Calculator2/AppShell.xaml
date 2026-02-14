@@ -5,14 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Calculator2"
     Shell.FlyoutBehavior="Flyout"
-    Title="Calculator2">
+    Title="Калькулятор">
 
-    <!-- 1. Пункт меню: ОБЫЧНЫЙ КАЛЬКУЛЯТОР -->
     <FlyoutItem Title="Обычный" Icon="calculator.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
-    <!-- 2. Пункт меню: ИНЖЕНЕРНЫЙ КАЛЬКУЛЯТОР -->
     <FlyoutItem Title="Инженерный" Icon="dotnet_bot.png">
         <ShellContent ContentTemplate="{DataTemplate local:EngineeringPage}" />
     </FlyoutItem>
