@@ -62,7 +62,7 @@ namespace Calculator2
         private static void DisableMaximizeButton(IntPtr hwnd)
         {
             var style = GetWindowLong(hwnd, GWL_STYLE);
-            style &= ~WS_MAXIMIZEBOX;  // убираем флаг maximize
+            style &= ~WS_MAXIMIZEBOX;  
             SetWindowLong(hwnd, GWL_STYLE, style);
         }
 #endif

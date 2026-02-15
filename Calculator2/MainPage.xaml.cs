@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
     private async void OnNumberClicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
-        await AnimateButton(button); // Анимация
+        await AnimateButton(button);
 
         string pressedNumber = button.Text;
 

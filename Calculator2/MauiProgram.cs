@@ -32,14 +32,14 @@ namespace Calculator2
                             var windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
                             var appWindow = AppWindow.GetFromWindowId(windowId);
 
-                            // Отключение кнопки "развернуть" и ресайза
+                            
                             if (appWindow.Presenter is OverlappedPresenter presenter)
                             {
                                 presenter.IsMaximizable = false;
                                 presenter.IsResizable = false;
                             }
 
-                            // Центрирование окна
+                            
                             var display = DisplayArea.Primary;
                             int width = 450;
                             int height = 600;

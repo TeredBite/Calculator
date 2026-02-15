@@ -168,7 +168,7 @@ public partial class EngineeringPage : ContentPage
 
         if (button.Text == "π")
             SetNumberToScreen(Math.PI);
-        else // e
+        else 
             SetNumberToScreen(Math.E);
 
         isOperatorClicked = false; 
