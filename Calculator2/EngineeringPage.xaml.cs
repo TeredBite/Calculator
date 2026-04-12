@@ -55,8 +55,13 @@ public partial class EngineeringPage : ContentPage
             isOperatorClicked = false;
         }
 
-        if (ResultLabel.Text == "0" && pressed != ".")
-            ResultLabel.Text = pressed;
+        if ((ResultLabel.Text == "0" || ResultLabel.Text == "-0") && pressed != ".")
+        {
+            if (ResultLabel.Text == "-0")
+                ResultLabel.Text = "-" + pressed;
+            else
+                ResultLabel.Text = pressed;
+        }
         else
         {
             if (pressed == "." && ResultLabel.Text.Contains(".")) return;
@@ -88,7 +93,15 @@ public partial class EngineeringPage : ContentPage
             case "+": result = firstNumber + secondNumber; break;
             case "-": result = firstNumber - secondNumber; break;
             case "X": result = firstNumber * secondNumber; break;
-            case "/": result = secondNumber != 0 ? firstNumber / secondNumber : 0; break;
+            case "/":
+                if (secondNumber != 0)
+                    result = firstNumber / secondNumber;
+                else
+                {
+                    ResultLabel.Text = "Error";
+                    return;
+                }
+                break;
         }
 
         SetNumberToScreen(result);
@@ -106,7 +119,16 @@ public partial class EngineeringPage : ContentPage
 
     private async void OnNegativeClicked(object sender, EventArgs e)
     {
-        await AnimateButton((Button)sender);
+        Button button = (Button)sender;
+        await AnimateButton(button);
+
+        if (isOperatorClicked)
+        {
+            ResultLabel.Text = "-0";
+            isOperatorClicked = false;
+            return;
+        }
+
         double val = GetNumberFromScreen();
         SetNumberToScreen(val * -1);
     }
@@ -151,7 +173,10 @@ public partial class EngineeringPage : ContentPage
                 result = Math.Pow(currentVal, 2);
                 break;
             case "%":
-                result = currentVal / 100;
+                if (!string.IsNullOrEmpty(mathOperator) && firstNumber != 0)
+                    result = firstNumber * (currentVal / 100);
+                else
+                    result = currentVal / 100;
                 break;
         }
 

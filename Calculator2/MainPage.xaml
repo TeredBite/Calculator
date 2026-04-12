@@ -24,7 +24,7 @@
             
             <Label x:Name="ResultLabel"
            TranslationX="15" TranslationY="5" 
-           Text="12345678901211.E"
+           Text="0"
            FontAttributes="Bold"
            TextColor="White"
            FontSize="40"

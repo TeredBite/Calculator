@@ -61,10 +61,12 @@ public partial class MainPage : ContentPage
         }
 
     
-        if (ResultLabel.Text == "0" && pressedNumber != ".")
+        if ((ResultLabel.Text == "0" || ResultLabel.Text == "-0") && pressedNumber != ".")
         {
-           
-            ResultLabel.Text = pressedNumber;
+            if (ResultLabel.Text == "-0")
+                ResultLabel.Text = "-" + pressedNumber;
+            else
+                ResultLabel.Text = pressedNumber;
         }
         else
         {
