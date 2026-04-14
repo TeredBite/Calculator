@@ -61,23 +61,28 @@ public partial class MainPage : ContentPage
         }
 
     
-        if ((ResultLabel.Text == "0" || ResultLabel.Text == "-0") && pressedNumber != ".")
+        string text = ResultLabel.Text ?? "0";
+        string withoutSign = text.TrimStart('-', '+');
+        bool isAllZeros = withoutSign.Length > 0 && withoutSign.All(c => c == '0');
+        bool hasDecimal = text.Contains(".");
+        if (isAllZeros && !hasDecimal && pressedNumber != ".")
         {
-            if (ResultLabel.Text == "-0")
-                ResultLabel.Text = "-" + pressedNumber;
+            if (text.StartsWith("-"))
+                text = "-" + pressedNumber;
             else
-                ResultLabel.Text = pressedNumber;
+                text = pressedNumber;
         }
         else
         {
            
-            if (pressedNumber == "." && ResultLabel.Text.Contains("."))
+            if (pressedNumber == "." && text.Contains("."))
             {
                 return;
             }
 
-            ResultLabel.Text += pressedNumber;
+            text += pressedNumber;
         }
+        ResultLabel.Text = text;
     }
 
    
